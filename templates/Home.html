@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Churn Prediction</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #001f3f;
+            color: #ffffff;
+            padding-top: 50px;
+        }
+        .container {
+            max-width: 700px;
+            background-color: #220e79;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .form-group textarea, .form-group select {
+            resize: none;
+            background-color: #333;
+            color: #ffffff;
+        }
+        .form-control {
+            border: 1px solid #555;
+            background-color: #333;
+            color: #ffffff;
+        }
+        .form-control option {
+            background-color: #333;
+            color: #ffffff;
+        }
+        .form-control:focus {
+            border-color: #007bff;
+            background-color: #444;
+        }
+        .btn-primary {
+            width: 100%;
+            background-color: #007bff;
+            border: none;
+        }
+        .output-textarea {
+            background-color: #333;
+            color: #ffffff;
+            resize: none;
+            border: 1px solid #555;
+        }
+        .output-container {
+            background-color: #282828;
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .output-container h4 {
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">Customer Churn Prediction</h2>
+        <form action="/" method="POST">
+            <div class="form-group">
+                <label for="query1">SeniorCitizen:</label>
+                <select class="form-control" id="query1" name="query1">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="query2">MonthlyCharges:</label>
+                <textarea class="form-control" id="query2" name="query2" rows="1">{{query2}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="query3">TotalCharges:</label>
+                <textarea class="form-control" id="query3" name="query3" rows="1">{{query3}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="query4">Gender:</label>
+                <textarea class="form-control" id="query4" name="query4" rows="1">{{query4}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="query5">Partner:</label>
+                <select class="form-control" id="query5" name="query5">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="query6">Dependents:</label>
+                <select class="form-control" id="query6" name="query6">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="query7">PhoneService:</label>
+                <select class="form-control" id="query7" name="query7">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="query8">MultipleLines:</label>
+                <textarea class="form-control" id="query8" name="query8" rows="1">{{query8}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="query9">InternetService:</label>
+                <select class="form-control" id="query9" name="query9">
+                    <option value="Fibre Optic">Fibre Optic</option>
+                    <option value="DSL">DSL</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="query10">OnlineSecurity:</label>
+                <select class="form-control" id="query10" name="query10">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="No internet service">No internet service</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="query11">OnlineBackup:</label>
+                <select class="form-control" id="query11" name="query11">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="No internet service">No internet service</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="query12">DeviceProtection:</label>
+                <select class="form-control" id="query12" name="query12">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="No internet service">No internet service</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="query13">TechSupport:</label>
+                <select class="form-control" id="query13" name="query13">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="No internet service">No internet service</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="query14">StreamingTV:</label>
+                <select class="form-control" id="query14" name="query14">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="No internet service">No internet service</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="query15">StreamingMovies:</label>
+                <textarea class="form-control" id="query15" name="query15" rows="1">{{query15}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="query16">Contract:</label>
+                <select class="form-control" id="query16" name="query16">
+                    <option value="Month-to-month">Month-to-month</option>
+                    <option value="Two year">Two year</option>
+                    <option value="One year">One year</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="query17">PaperlessBilling:</label>
+                <select class="form-control" id="query17" name="query17">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="query18">PaymentMethod:</label>
+                <select class="form-control" id="query18" name="query18">
+                    <option value="Electronic check">Electronic check</option>
+                    <option value="Mailed check">Mailed check</option>
+                    <option value="Bank transfer (automatic)">Bank transfer (automatic)</option>
+                    <option value="Credit card (automatic)">Credit card (automatic)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="query19">Tenure:</label>
+                <textarea class="form-control" id="query19" name="query19" rows="1">{{query19}}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <div class="output-container mt-4">
+            <h4>Prediction:</h4>
+            <textarea class="form-control output-textarea" id="output1" rows="1" readonly>{{output1}}</textarea>
+            <h4 class="mt-3">Confidence:</h4>
+            <textarea class="form-control output-textarea" id="output2" rows="1" readonly>{{output2}}</textarea>
+        </div>
+    </div>
+</body>
+</html>
